@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Face Recognition Scan</title>
+</head>
+<body>
+    <h2>Face Recognition Scanner</h2>
+    <button onclick="startScan()">Start Scan</button>
+    <p id="status"></p>
+
+    <script>
+        function startScan() {
+            const status = document.getElementById("status");
+            status.innerText = "Starting scan...";
+            fetch("http://127.0.0.1:20000/scan")
+                .then(res => res.json())
+                .then(data => {
+                    status.innerText = data.message;
+                })
+                .catch(() => {
+                    status.innerText = "Failed to connect to server";
+                });
+        }
+    </script>
+</body>
+</html>
